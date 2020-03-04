@@ -1,11 +1,16 @@
+import lejos.hardware.BrickFinder;
 import lejos.hardware.port.SensorPort;
+import lejos.hardware.port.UARTPort;
 import lejos.hardware.sensor.EV3UltrasonicSensor;
 import lejos.robotics.SampleProvider;
 import lejos.utility.Delay;
 
 public class Main {
+    private static EV3UltrasonicSensor ultraSensor;
     public static void main(String[] args) {
-        EV3UltrasonicSensor ultraSensor = new EV3UltrasonicSensor(SensorPort.S1);
+        ShutDownTask shutDownTask = new ShutDownTask();
+        Runtime.getRuntime().addShutdownHook(shutDownTask);
+        ultraSensor = new EV3UltrasonicSensor(SensorPort.S4);
 
         SampleProvider sp = ultraSensor.getDistanceMode();
         float distValue = 0.0f;
@@ -24,4 +29,17 @@ public class Main {
         }
     }
 
+    private static class ShutDownTask extends Thread {
+        @Override
+        public void run() {
+            try {
+                ultraSensor.close();
+                UARTPort port = BrickFinder.getDefault().getPort("S4").open(UARTPort.class);
+                port.close();
+            } catch (NullPointerException e) {
+
+            }
+
+        }
+    }
 }
