@@ -5,6 +5,7 @@ public class Robot {
 
     private RegulatedMotor rightMotor;
     private RegulatedMotor leftMotor;
+
     public Robot(RegulatedMotor right, RegulatedMotor left) {
         rightMotor = right;
         leftMotor = left;
