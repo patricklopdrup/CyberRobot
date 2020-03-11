@@ -20,21 +20,12 @@ public class MotorTest {
         Sound.systemSound(true, 3);
         Sound.systemSound(true, 4);
         //Sound.playSample(new File("hej.wav"), 100);
-
-
-
-
-
-
 //		float angle = Motor.A.getPosition();
 //		System.out.println("angle: " + angle);
 //		Motor.A.rotateTo(90);
 //		float nAngle = Motor.A.getPosition();
 //		System.out.println("new angle: " + nAngle);
-
         //Delay.msDelay(5000);
-
-
     }
 
 
